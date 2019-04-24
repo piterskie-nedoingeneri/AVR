@@ -1,6 +1,7 @@
+//немного трешнявый код для псевдо игровой приставки
 #define F_CPU 16000000
 #define byte uint8_t
-#include <avr/io.h>//#iclud
+#include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #define PORT1 PORTB
