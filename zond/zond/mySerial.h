@@ -38,15 +38,15 @@ void writeint(long int d)
 {
 	if(d<0) send_byte('-');
 	else if(d==0) send_byte('0');
-	unsigned int buff= abs( d );
+	long int buff= labs( d );
 	int lenin=1;
 	while(buff>=10)
 	{
 		buff/=10;
 		lenin*=10;
 	}
-	buff=abs(d);
-	for(uint8_t i=1; i <= lenin; i*=10)
+	buff=labs(d);
+	for(long int i=1; i <= lenin; i*=10)
 	{
 		send_byte((uint8_t) (buff/(lenin/i)) + '\0'); 
 		buff %= lenin/i;
