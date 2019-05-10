@@ -39,15 +39,22 @@ unsigned int num_count(long int num)
 void UART_transmit_int(long int data_in)
 {
 	if(data_in < 0)
-	{
-		data_in = -data_in;
 		UART_transmit_char('-');
-	}
-	unsigned int count = num_count(data_in);
-	for(unsigned int i=1; i <= count; i++)
+	
+	data_in = labs(data_in);
+	long int data_in_buff = data_in;
+	long int count = 1;
+	
+	while(data_in_buff >= 10)
 	{
-		UART_transmit_char(((unsigned char)(data_in / pow(10, count - i))) + 0x30);
-		data_in %= (long int)pow(10, count - i);
+		count *= 10;
+		data_in_buff /= 10;
+	}
+	
+	for(long int i=1; i <= count; i *= 10)
+	{
+		UART_transmit_char(((unsigned char)(data_in / (count / i))) + 0x30);
+		data_in %= count / i;
 	}
 }
 
