@@ -114,6 +114,10 @@ int main(void)
 	I2C_init();
 	mpu_init();	
 	print("HELLO FROM ATMEGA328\n");
+	if(mpu_check())
+		print("MPU OK\n");
+	else
+		print("ERROR MPU!");
 	sei();
 	while(1)
     {
@@ -122,7 +126,11 @@ int main(void)
 			print("\nPHOTOREZISTOR:");
 			writeint(adcRead());
 		}
-		
+		print("\nT=");
+		writeint(mpu_read_t());
+		print("\n y=");
+		writeint(mpu_read_ay());
+		_delay_ms(1000);
     }
 }
 

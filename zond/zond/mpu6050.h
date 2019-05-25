@@ -91,7 +91,7 @@ bool mpu_check()
 		return False;
 }
 
-float mpu_read_t()
+int mpu_read_t()
 {
 	int temperature = mpu_read_2byte(MPU6050_T);
 	return (temperature / 340) + 36.53;

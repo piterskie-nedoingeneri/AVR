@@ -48,7 +48,7 @@ void writeint(long int d)
 	buff=labs(d);
 	for(long int i=1; i <= lenin; i*=10)
 	{
-		send_byte((uint8_t) (buff/(lenin/i)) + '\0'); 
+		send_byte((uint8_t) (buff/(lenin/i)) + '0'); 
 		buff %= lenin/i;
 	}
 }
