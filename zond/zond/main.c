@@ -62,6 +62,8 @@ void checkword()
 		{
 			kolvo=kolvo*10 + (uint8_t)(word[i]-'0');
 		}
+		print("\n KOLVO ");
+		writeint(kolvo);
 		getsample();
 	}
 }
@@ -84,21 +86,29 @@ ISR(TIMER0_COMPA_vect)
 }
 ISR(USART_RX_vect)
 {
+	
 	char buff = UDR0;
+	//send_byte('\n');
+	//send_byte(buff);
 	point:
-	if(((buff!='\r')||(buff!='\n'))||(ind<16))
+	if(((buff!='\r')&&(buff!='\n'))&&(ind<16))
 	{//читаем слово
-		word[ind]+=buff;
+		word[ind]=buff;
 		ind++;
+		//print(" i=");
+		//writeint(ind);
 	}
 	else
 	{//начинаем читать новое слово
+		//print("EXIT\n");
 		checkword();
-		if(ind<16) word[ind+1]='\0';
+		
+		if(ind<16) word[ind]='\0';
 		print("\nline:");
 		print(word);
+		send_byte('\n');
 		ind=0;
-		if((buff!='\r')||(buff!='\n')) 
+		if((buff!='\r')&&(buff!='\n')) 
 			goto point;
 	}
 }

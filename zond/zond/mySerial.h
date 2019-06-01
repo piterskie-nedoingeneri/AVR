@@ -14,10 +14,10 @@
 
 void uartInit()
 {
-	UBRR0L=8;//115200
+	UBRR0L=51;//8-115200
 	UCSR0B |= (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
-	UCSR0A |= (1 << U2X0);
-	UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
+	//UCSR0A |= (1 << U2X0); //for 115200
+	UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);	
 }
 void send_byte(uint8_t byte)
 {
